@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "T3-Orchestrator",
+    "description": "Lässt Sitzungen und ACP-Coding-Agenten Aufgaben über die Orchestrierungswerkzeuge von T3 Code aneinander delegieren."
+  }
+}

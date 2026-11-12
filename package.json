@@ -1,0 +1,42 @@
+{
+  "name": "dsh-t3-trial-bundle",
+  "version": "0.2.2-rc.1",
+  "description": "T3-style inbox and agent orchestration for DeepSeek Harness",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "dsh": "0.2.2-rc.1"
+  },
+  "files": [
+    "plugins",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "dependencies": {
+    "@agentclientprotocol/sdk": "1.4.0",
+    "@deepseek-ai/schemastery": "3.19.0",
+    "@effect/platform-node": "4.1.2",
+    "@modelcontextprotocol/server": "2.2.0",
+    "effect": "4.1.2",
+    "zod": "4.4.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.1.0",
+    "@deepseek-ai/dsh-agent": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-llm": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-session": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-storage-domain": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-subprocess": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-tools": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-api-session-controller": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-api-gateway": "0.2.2-rc.1"
+  }
+}

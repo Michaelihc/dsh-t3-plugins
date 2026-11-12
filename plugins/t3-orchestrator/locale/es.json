@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Orquestador T3",
+    "description": "Permite que las sesiones y los agentes de programación ACP se deleguen trabajo entre sí con las herramientas de orquestación de T3 Code."
+  }
+}

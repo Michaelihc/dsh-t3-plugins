@@ -1,0 +1,10 @@
+- insert:
+    - id: t3-orchestrator
+      name: './plugins/t3-orchestrator/lib/index.js'
+      config:
+        runtimeMode: auto-accept-edits
+    - id: t3-inbox
+      name: './plugins/t3-inbox/lib/index.js'
+      config:
+        autoSettleAfterDays: 7
+        sweepIntervalMs: 60000
