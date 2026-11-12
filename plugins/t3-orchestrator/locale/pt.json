@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Orquestrador T3",
+    "description": "Permite que sessões e agentes de programação ACP deleguem trabalho entre si pelas ferramentas de orquestração do T3 Code."
+  }
+}

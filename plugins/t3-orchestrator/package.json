@@ -1,0 +1,48 @@
+{
+  "name": "@deepseek-ai/dsh-t3-orchestrator",
+  "description": "Experimental: T3 Code orchestrator MCP for dsh Sessions and ACP coding agents, lifted from T3 Code",
+  "version": "0.2.2-rc.1",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./lib/index.js"
+    },
+    "./bridge": {
+      "default": "./lib/bridge.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "locale/*.json",
+    "lib/index.js",
+    "lib/bridge.js",
+    "src/**/*.ts",
+    "schemas/t3-tools.upstream.json",
+    "THIRD_PARTY.md",
+    "PORTING.md"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@agentclientprotocol/sdk": "1.4.0",
+    "@deepseek-ai/schemastery": "3.19.0",
+    "@effect/platform-node": "4.1.2",
+    "@modelcontextprotocol/server": "2.2.0",
+    "effect": "4.1.2",
+    "zod": "4.4.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.1.0",
+    "@deepseek-ai/dsh-agent": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-llm": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-session": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-storage-domain": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-subprocess": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-tools": "0.2.2-rc.1"
+  }
+}

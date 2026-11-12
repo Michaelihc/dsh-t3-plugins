@@ -1,0 +1,9 @@
+{
+  "sourceRepository": "https://github.com/deepseek-ai/DeepSeek-Harness.git",
+  "sourceBranch": "dsh-t3",
+  "sourceCommit": "22533e5bfe2fc1f538d120879bd125dc9b5f9995",
+  "artifact": "distribution/staging/dsh-t3-trial-bundle",
+  "dshVersion": "0.2.2-rc.1",
+  "t3SourceCommit": "4c8eb1dfd503fa94986c51b84532604c2abe54bb",
+  "note": "Prebuilt files imported from the local private trial. The source branch is local and is not present in the upstream repository."
+}

@@ -1,0 +1,67 @@
+/* oxlint-disable -- upstream formatting is kept so re-syncs stay byte-comparable. */
+// Lifted verbatim from T3 Code packages/contracts/src/relayClient.ts @ 4c8eb1dfd5 (MIT, Copyright (c) 2026 T3 Tools Inc.).
+// Only import specifiers are rewritten; regenerate with scripts/sync-t3.mjs. See PORTING.md.
+import * as Schema from "effect/Schema";
+
+export const RelayClientStatusSchema = Schema.Union([
+  Schema.Struct({
+    status: Schema.Literal("available"),
+    executablePath: Schema.String,
+    source: Schema.Literals(["override", "managed", "path"]),
+    version: Schema.String,
+  }),
+  Schema.Struct({
+    status: Schema.Literal("missing"),
+    version: Schema.String,
+  }),
+  Schema.Struct({
+    status: Schema.Literal("unsupported"),
+    platform: Schema.String,
+    arch: Schema.String,
+    version: Schema.String,
+  }),
+]);
+export type RelayClientStatus = typeof RelayClientStatusSchema.Type;
+
+export const RelayClientInstallProgressStageSchema = Schema.Literals([
+  "checking",
+  "waiting_for_lock",
+  "downloading",
+  "verifying",
+  "installing",
+  "validating",
+  "activating",
+]);
+export type RelayClientInstallProgressStage = typeof RelayClientInstallProgressStageSchema.Type;
+
+export const RelayClientInstallProgressEventSchema = Schema.Union([
+  Schema.Struct({
+    type: Schema.Literal("progress"),
+    stage: RelayClientInstallProgressStageSchema,
+  }),
+  Schema.Struct({
+    type: Schema.Literal("complete"),
+    status: RelayClientStatusSchema,
+  }),
+]);
+export type RelayClientInstallProgressEvent = typeof RelayClientInstallProgressEventSchema.Type;
+
+export const RelayClientInstallFailureReasonSchema = Schema.Literals([
+  "download_failed",
+  "invalid_checksum",
+  "install_locked",
+  "managed_by_policy",
+  "override_missing",
+  "unsupported_platform",
+  "validation_failed",
+  "write_failed",
+]);
+export type RelayClientInstallFailureReason = typeof RelayClientInstallFailureReasonSchema.Type;
+
+export class RelayClientInstallFailedError extends Schema.TaggedError<RelayClientInstallFailedError>()(
+  "RelayClientInstallFailedError",
+  {
+    reason: RelayClientInstallFailureReasonSchema,
+    message: Schema.String,
+  },
+) {}
