@@ -13,10 +13,11 @@ import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-run
  * MIT License — Copyright (c) 2026 T3 Tools Inc. See ../../logic.ts for the full notice.
  */
 import { memo, useEffect, useRef, useState } from 'react';
-import { FishLogo, HoverCard, Menu, Tooltip } from '@deepseek-ai/dsh-client-ui-primitives';
+import { HoverCard, Menu, Tooltip } from '@deepseek-ai/dsh-client-ui-primitives';
 import { canSnooze, compactRelativeTime, pickSnoozePreset, resolveSnoozePresets, snoozeWakeIn, workingDurationParts, } from "../../logic.js";
 import { formatParts, formatRelative, presetLabel, presetWhen } from "../format.js";
 import { shouldRecede } from "../view.js";
+import { hasProviderMark, ProviderMark } from "./agentMarks.js";
 import { AlarmClockIcon, AlarmClockOffIcon, CheckIcon, CircleCheckIcon, CircleDashedIcon, CircleDotDashedIcon, ClockIcon, FolderIcon, GitBranchIcon, MessageCircleQuestionIcon, PinIcon, PinOffIcon, ShieldQuestionIcon, SparkleIcon, Undo2Icon, } from "./icons.js";
 import css from './Sidebar.module.css';
 function cx(...names) {
@@ -38,7 +39,7 @@ function RelativeTimeLabel({ at, t }) {
     return _jsx(_Fragment, { children: useTickingLabel(now => formatRelative(compactRelativeTime(at, now), t), nextMinute) });
 }
 /** T3 `WorkingDuration`: "42s", then "29m"; it re-renders only when its text changes. */
-function WorkingDuration({ startedMs, t }) {
+export function WorkingDuration({ startedMs, t }) {
     const next = (now) => {
         const elapsed = now - startedMs;
         return elapsed < 60_000 ? startedMs + (Math.floor(elapsed / 1000) + 1) * 1000 : startedMs + (Math.floor(elapsed / 60_000) + 1) * 60_000;
@@ -115,12 +116,12 @@ function SnoozeMenuButton({ open, onOpenChange, onSnooze, onCustom, t }) {
                     onOpenChange(!open);
                 }, onDoubleClick: (event) => { event.stopPropagation(); }, children: _jsx(ClockIcon, { className: css.size3 }) }) })) }));
 }
-/** T3 `ProviderInstanceIcon` in its compact sidebar size: the provider's mark, dimmed. */
+/** T3 `ProviderInstanceIcon` in its compact sidebar size: the provider's or native agent's mark, dimmed. */
 function ProviderIcon({ model, className }) {
     if (model === null)
         return null;
-    return model.provider.toLowerCase().includes('deepseek')
-        ? _jsx(FishLogo, { size: 14, className: className })
+    return hasProviderMark(model.provider, model.model)
+        ? _jsx(ProviderMark, { provider: model.provider, model: model.model, size: 14, className: className })
         : _jsx(SparkleIcon, { className: className, width: 14, height: 14 });
 }
 /** T3 `SidebarThreadTooltip` inside `ThreadHoverCard`. */

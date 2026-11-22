@@ -22,6 +22,11 @@ export interface ThreadRowProps {
         readonly onHighlight: () => void;
     };
 }
+/** T3 `WorkingDuration`: "42s", then "29m"; it re-renders only when its text changes. */
+export declare function WorkingDuration({ startedMs, t }: {
+    readonly startedMs: number;
+    readonly t: InboxTranslate;
+}): import("react").JSX.Element;
 /**
  * Render one thread row.
  * @param props - row data, variant, selection, and commands.
