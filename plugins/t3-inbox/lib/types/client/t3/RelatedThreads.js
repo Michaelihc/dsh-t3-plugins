@@ -11,11 +11,18 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { useState } from 'react';
 import { Menu } from '@deepseek-ai/dsh-client-ui-primitives';
 import { BotIcon, CircleCheckIcon, CircleDashedIcon, CircleDotDashedIcon, CornerLeftUpIcon, MessageCircleQuestionIcon, ShieldQuestionIcon } from "./icons.js";
+import { hasProviderMark, ProviderMark } from "./agentMarks.js";
 import css from './Sidebar.module.css';
 /** T3 `threadRelationshipStatusLabel`, for the states a Session reports. */
 const STATUS_KEY = {
     working: 'status.working', waiting: 'status.waiting', approval: 'status.approval', input: 'status.input', ready: 'status.completed',
 };
+/** The thread's agent or provider mark, or T3's generic subagent glyph when it has none. */
+function agentIcon(thread, className) {
+    return thread !== undefined && thread.model !== null && hasProviderMark(thread.model.provider, thread.model.model)
+        ? _jsx(ProviderMark, { provider: thread.model.provider, model: thread.model.model, size: 16, className: className })
+        : _jsx(BotIcon, { className: className });
+}
 function statusIcon(status) {
     const cls = `${css.size3} ${css.shrink0}`;
     switch (status) {
@@ -46,7 +53,7 @@ export function RelatedThreads({ t, useRelations, open }) {
             items.push({
                 id: child.id,
                 label: (_jsxs("span", { className: css.relatedRow, "aria-label": t('related.itemAria', { title: child.title, status: t(STATUS_KEY[child.status]) }), children: [_jsx("span", { className: css.relatedTitle, children: child.title }), statusIcon(child.status)] })),
-                icon: _jsx(BotIcon, { className: css.size4 }),
+                icon: agentIcon(child, css.size4),
             });
         }
     }
@@ -56,6 +63,6 @@ export function RelatedThreads({ t, useRelations, open }) {
             open(id);
         }, anchor: (_jsx("button", { type: "button", className: css.relatedTrigger, "aria-label": t('related.trigger'), "aria-expanded": menuOpen, onClick: () => { setMenuOpen(value => !value); }, children: relations.parent !== null
                 ? _jsxs(_Fragment, { children: [_jsx(CornerLeftUpIcon, { className: css.size3 }), _jsx("span", { className: css.relatedTitle, children: relations.parent.title })] })
-                : _jsxs(_Fragment, { children: [_jsx(BotIcon, { className: css.size3 }), _jsx("span", { children: relations.children.length }), working > 0 && _jsx(CircleDashedIcon, { className: `${css.size3} ${css.toneInfo}` })] }) })) }));
+                : _jsxs(_Fragment, { children: [agentIcon(relations.children.find(child => child.status === 'working') ?? relations.children[0], css.size3), _jsx("span", { children: relations.children.length }), working > 0 && _jsx(CircleDashedIcon, { className: `${css.size3} ${css.toneInfo}` })] }) })) }));
 }
 //# sourceMappingURL=RelatedThreads.js.map

@@ -5,10 +5,12 @@ import { CustomSnoozeDialog } from "./CustomSnoozeDialog.js";
 import { ICON_KEYS, registerThreadMenu } from "./menu.js";
 import { en, ja, es, fr, de, ru, pt, zh } from "./locales.js";
 import { InboxModel } from "./model.js";
+import { registerModelPicker } from "./modelPicker.js";
 import { BrandName, CHROME_CSS, FooterUtilities } from "./t3/Chrome.js";
 import { ArchiveIcon, CheckIcon, CircleCheckIcon, ClockIcon, CopyIcon, FolderIcon, FolderTreeIcon, HashIcon, PencilIcon, PinIcon, PinOffIcon, TimerIcon, menuIcon, } from "./t3/icons.js";
 import { InboxSidebar } from "./t3/Sidebar.js";
 import { RelatedThreads } from "./t3/RelatedThreads.js";
+import { DELEGATE_TOOL, DelegationCard } from "./t3/DelegationCard.js";
 /** Shadows the Workspace browser (priority 0); lower priority renders. */
 const SIDEBAR_PRIORITY = -10;
 /** Services the surfaces need once the Remote is mounted. */
@@ -19,6 +21,8 @@ export const inject = ['remote', ...UI_SERVICES];
 const NS = 't3Inbox';
 function registerUi(ctx) {
     ctx.effect(() => ctx.locale.register(NS, { zh, en, ja, es, fr, de, ru, pt }), 't3-inbox: dictionaries');
+    const t = ctx.locale.bind(NS);
+    registerModelPicker(ctx, () => t('model.nativeAgents'));
     const remote = ctx.remote.inbox;
     const model = new InboxModel(ctx, remote, {
         sessions: ctx.sessions.list,
@@ -67,6 +71,16 @@ function registerUi(ctx) {
             open: (id) => { actions.open(id); },
         }),
     }, RelatedThreads));
+    // The orchestrator's delegate_task call reads as the delegated thread itself, as in T3's transcript.
+    ctx.slots.inject('tool.call.toolview', () => ctx.slots.register({
+        name: 'tool.call.toolview',
+        key: DELEGATE_TOOL,
+        locale: NS,
+        inject: (sessionId) => ({
+            hooks: { relations: model.relationsOf(String(sessionId)) },
+            open: (id) => { actions.open(id); },
+        }),
+    }, DelegationCard));
     ctx.slots.inject('sidebar.brand.name', () => ctx.slots.register({
         name: 'sidebar.brand.name', priority: SIDEBAR_PRIORITY, locale: NS,
     }, BrandName));

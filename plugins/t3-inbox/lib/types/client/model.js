@@ -301,11 +301,14 @@ export class InboxModel {
                 const facts = status.get(id);
                 const thread = this.threads[id];
                 const pending = facts?.pendingInteraction;
+                const running = facts?.running ?? summary?.running ?? false;
                 return {
                     id,
                     title: summary?.title ?? summary?.displayTitle ?? id,
+                    model: summary === undefined ? null : modelOf(summary.projectionValues),
+                    runningSince: running ? this.runSince(id) : null,
                     status: resolveStatus({
-                        running: facts?.running ?? summary?.running ?? false,
+                        running,
                         approval: pending?.kind === 'approval',
                         question: pending !== undefined && pending.kind !== 'approval',
                         questionAt: null,
@@ -340,6 +343,18 @@ export class InboxModel {
         const value = (items ?? []).map(item => ({ id: item.workspaceId, name: item.title }));
         this.projectCache = { key: items, value };
         return value;
+    }
+    /**
+     * When a running Session's current run started; a run first read here, before the list
+     * observer saw it, starts now, so a related thread shows its running time on first render.
+     */
+    runSince(id) {
+        const since = this.runningSince.get(id);
+        if (since !== undefined)
+            return since;
+        const now = Date.now();
+        this.runningSince.set(id, now);
+        return now;
     }
     observe(list, status, now) {
         for (const id of list.ids) {

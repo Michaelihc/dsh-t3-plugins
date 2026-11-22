@@ -37,6 +37,10 @@ export declare const zh: {
     'menu.wake': string;
     'menu.filterBy': string;
     'menu.showAllProjects': string;
+    'model.nativeAgents': string;
+    'delegation.untitled': string;
+    'delegation.open': string;
+    'delegation.failed': string;
     'menu.autoSettle': string;
     'menu.enabled': string;
     'menu.disabled': string;
@@ -160,6 +164,10 @@ export declare const en: {
     'menu.wake': string;
     'menu.filterBy': string;
     'menu.showAllProjects': string;
+    'model.nativeAgents': string;
+    'delegation.untitled': string;
+    'delegation.open': string;
+    'delegation.failed': string;
     'menu.autoSettle': string;
     'menu.enabled': string;
     'menu.disabled': string;
@@ -275,6 +283,10 @@ export declare const ja: {
     'menu.wake': string;
     'menu.filterBy': string;
     'menu.showAllProjects': string;
+    'model.nativeAgents': string;
+    'delegation.untitled': string;
+    'delegation.open': string;
+    'delegation.failed': string;
     'menu.autoSettle': string;
     'menu.enabled': string;
     'menu.disabled': string;
@@ -390,6 +402,10 @@ export declare const es: {
     'menu.wake': string;
     'menu.filterBy': string;
     'menu.showAllProjects': string;
+    'model.nativeAgents': string;
+    'delegation.untitled': string;
+    'delegation.open': string;
+    'delegation.failed': string;
     'menu.autoSettle': string;
     'menu.enabled': string;
     'menu.disabled': string;
@@ -505,6 +521,10 @@ export declare const fr: {
     'menu.wake': string;
     'menu.filterBy': string;
     'menu.showAllProjects': string;
+    'model.nativeAgents': string;
+    'delegation.untitled': string;
+    'delegation.open': string;
+    'delegation.failed': string;
     'menu.autoSettle': string;
     'menu.enabled': string;
     'menu.disabled': string;
@@ -620,6 +640,10 @@ export declare const de: {
     'menu.wake': string;
     'menu.filterBy': string;
     'menu.showAllProjects': string;
+    'model.nativeAgents': string;
+    'delegation.untitled': string;
+    'delegation.open': string;
+    'delegation.failed': string;
     'menu.autoSettle': string;
     'menu.enabled': string;
     'menu.disabled': string;
@@ -735,6 +759,10 @@ export declare const ru: {
     'menu.wake': string;
     'menu.filterBy': string;
     'menu.showAllProjects': string;
+    'model.nativeAgents': string;
+    'delegation.untitled': string;
+    'delegation.open': string;
+    'delegation.failed': string;
     'menu.autoSettle': string;
     'menu.enabled': string;
     'menu.disabled': string;
@@ -850,6 +878,10 @@ export declare const pt: {
     'menu.wake': string;
     'menu.filterBy': string;
     'menu.showAllProjects': string;
+    'model.nativeAgents': string;
+    'delegation.untitled': string;
+    'delegation.open': string;
+    'delegation.failed': string;
     'menu.autoSettle': string;
     'menu.enabled': string;
     'menu.disabled': string;

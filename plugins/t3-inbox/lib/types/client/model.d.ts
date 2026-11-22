@@ -32,6 +32,13 @@ export interface InboxRelatedThread {
     readonly id: string;
     readonly title: string;
     readonly status: 'working' | 'waiting' | 'approval' | 'input' | 'ready';
+    /** Provider route and model of the thread's latest model selection, which names its agent. */
+    readonly model: {
+        readonly provider: string;
+        readonly model: string;
+    } | null;
+    /** When the current run started, while it runs. */
+    readonly runningSince: number | null;
 }
 /** A Session's orchestrator parent and subagent children. */
 export interface InboxRelations {
@@ -130,6 +137,11 @@ export declare class InboxModel {
      */
     relationsOf(sessionId: string): ObservableSnapshot<InboxRelations>;
     private projectList;
+    /**
+     * When a running Session's current run started; a run first read here, before the list
+     * observer saw it, starts now, so a related thread shows its running time on first render.
+     */
+    private runSince;
     private observe;
     private inputsOf;
     /** T3 `hasUnseenCompletion`: a finished run after the last visit, once the Session was ever visited. */

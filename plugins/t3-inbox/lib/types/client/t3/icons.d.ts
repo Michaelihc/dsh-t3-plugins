@@ -55,6 +55,14 @@ export declare const CheckIcon: {
     (props: IconProps): import("react").JSX.Element;
     displayName: string;
 };
+export declare const ChevronRightIcon: {
+    (props: IconProps): import("react").JSX.Element;
+    displayName: string;
+};
+export declare const CircleXIcon: {
+    (props: IconProps): import("react").JSX.Element;
+    displayName: string;
+};
 export declare const ClockIcon: {
     (props: IconProps): import("react").JSX.Element;
     displayName: string;
